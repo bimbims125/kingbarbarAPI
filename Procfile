@@ -1,0 +1,1 @@
+web: gunicorn kingbarbarAPI.wsgi:application --log-file -
