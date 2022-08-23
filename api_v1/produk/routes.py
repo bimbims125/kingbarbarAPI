@@ -5,6 +5,8 @@ from imagekitio import ImageKit
 from api_v1.produk.schema import BaseProdukSchema, RetrieveProdukByKategoriSchema, RetrieveProdukSchema
 from api_v1.models import Produk
 
+from .auth.auth import BasicAuth
+
 router = Router(tags=['Produk'])
 
 
@@ -36,7 +38,7 @@ async def retrieve_produk_by_kategori_id(request, id: int):
 async def retrieve_best_produk(request, best:bool):
     return await Produk.objects.async_filter(best=best)
 
-@router.post('/create/')
+@router.post('/create/', auth=BasicAuth())
 async def create_produk(request, payload: BaseProdukSchema = Form(...), img: UploadedFile = File(...)):
     imagekit = ImageKit(
         public_key='public_DqaP16cLj4ts9XK4kFCWKmkU1j4=',
@@ -74,7 +76,7 @@ async def update_produk(request, id: int, payload: BaseProdukSchema):
     _produk.kategori_id = payload.kategori_id
     _produk.best = payload.best
     _produk.save()
-    return {
+    return 200,{
         'success': True,
         'status_code': 200,
         'message': f'Data produk dengan id {id} berhasil di perbaharui'
