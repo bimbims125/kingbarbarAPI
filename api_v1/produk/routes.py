@@ -38,18 +38,19 @@ async def retrieve_best_produk(request, best:bool):
 
 @router.post('/create/')
 async def create_produk(request, payload: BaseProdukSchema = Form(...), img: UploadedFile = File(...)):
-    imagekit = ImageKit(
-        public_key='public_DqaP16cLj4ts9XK4kFCWKmkU1j4=',
-        private_key='private_72s6roDTx4nF0l7683JjVTEY9kw=',
-        url_endpoint='https://ik.imagekit.io/pramdpb/'
-    )
+    # imagekit = ImageKit(
+    #     public_key='public_DqaP16cLj4ts9XK4kFCWKmkU1j4=',
+    #     private_key='private_72s6roDTx4nF0l7683JjVTEY9kw=',
+    #     url_endpoint='https://ik.imagekit.io/pramdpb/'
+    # )
 
-    upload = imagekit.upload(
-        file=img,
-        file_name='produk_img.jpg',
-    )
-    imageUrl = upload['response']['url']
-    _produk = await Produk.objects.async_create(**payload.dict(), img=imageUrl)
+    # upload = imagekit.upload(
+    #     file=img,
+    #     file_name='produk_img.jpg',
+    # )
+    # imageUrl = upload['response']['url']
+    imgUrl = f'pram-api.herokuapp.com/media/produk/{img}'
+    _produk = await Produk.objects.async_create(**payload.dict(), img=img, img_url = imgUrl)
     _produk.save()
     return 200, {
         'success': True,

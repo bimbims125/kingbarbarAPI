@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from django.db import models
 from django.utils.text import slugify
 # Create your models here.
@@ -26,8 +27,9 @@ class Produk(models.Model):
     harga = models.PositiveIntegerField()
     kategori = models.ForeignKey(
         Kategori, on_delete=models.SET_NULL, null=True)
-    img = models.URLField()
+    img = models.ImageField(upload_to = 'produk/')
     best = models.BooleanField(default=False)
+    img_url = models.URLField()
     def __str__(self) -> str:
         return self.nama
 
