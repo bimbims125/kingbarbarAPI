@@ -28,7 +28,6 @@ class Produk(models.Model):
     kategori = models.ForeignKey(
         Kategori, on_delete=models.SET_NULL, null=True)
     img = models.ImageField(upload_to = 'produk/')
-    best = models.BooleanField(default=False)
     img_url = models.URLField()
     def __str__(self) -> str:
         return self.nama
