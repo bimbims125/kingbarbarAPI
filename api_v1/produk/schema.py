@@ -9,7 +9,6 @@ class BaseProdukSchema(Schema):
     harga:int
     deskripsi:str
     kategori_id:int
-    best:bool
 
 class RetrieveProdukSchema(ModelSchema):
     kategori:RetrieveKategoriSchema
