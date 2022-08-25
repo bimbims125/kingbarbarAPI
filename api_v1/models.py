@@ -29,7 +29,7 @@ class Produk(models.Model):
         Kategori, on_delete=models.SET_NULL, null=True)
     img = models.ImageField(upload_to = 'produk/')
     best = models.BooleanField(default=False)
-    img_url = models.CharField(max_length=100)
+    img_url = models.URLField()
     def __str__(self) -> str:
         return self.nama
 
