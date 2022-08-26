@@ -27,7 +27,7 @@ class Produk(models.Model):
     harga = models.PositiveIntegerField()
     kategori = models.ForeignKey(
         Kategori, on_delete=models.SET_NULL, null=True)
-    img = models.ImageField(upload_to = 'produk/')
+    img = models.FileField(upload_to = 'produk/')
     img_url = models.URLField()
     def __str__(self) -> str:
         return self.nama
@@ -35,3 +35,8 @@ class Produk(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nama)
         super(Produk, self).save()
+
+class Reseller(models.Model):
+    nama_toko = models.CharField(max_length=100, blank=False)
+    alamat = models.TextField()
+    no_telpon = models.PositiveIntegerField()
