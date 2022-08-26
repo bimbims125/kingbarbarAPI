@@ -27,7 +27,7 @@ class Produk(models.Model):
     harga = models.PositiveIntegerField()
     kategori = models.ForeignKey(
         Kategori, on_delete=models.SET_NULL, null=True)
-    img = models.ImageField(upload_to = 'produk/')
+    img = models.FileField(upload_to = 'produk/')
     img_url = models.URLField()
     def __str__(self) -> str:
         return self.nama
