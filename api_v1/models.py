@@ -35,3 +35,8 @@ class Produk(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nama)
         super(Produk, self).save()
+
+class Reseller(models.Model):
+    nama_toko = models.CharField(max_length=100, blank=False)
+    alamat = models.TextField()
+    no_telpon = models.PositiveIntegerField()
